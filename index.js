@@ -59,9 +59,23 @@ async function run() {
 
       //find in order collection
       const cursor = orderCollection.find(query);
-      const users = await cursor.toArray();
+      const orders = await cursor.toArray();
 
-      res.json(users); // send the orders to client side.
+      res.json(orders); // send the orders to client side.
+    });
+
+    // (READ) --> GET A SPECIFIC USER ORDER FROM DATABASE
+    app.get('/order/:email', async (req, res) => {
+      const email = req.params.email;
+      console.log(email);
+      const query = { email };
+      console.log(query);
+
+      const cursor = orderCollection.find(query); // find all the orders
+
+      const ordersOfUser = await cursor.toArray();
+
+      res.json(ordersOfUser); // send the order of a user to client side.
     });
 
     // (CREATE) --> CREATE ALL THE ORDER INFO IN DATABASE
@@ -81,10 +95,45 @@ async function run() {
       const result = await orderCollection.insertOne({
         ...newOrder,
         order_time,
-        staus: 'pending',
+        status: 'pending',
       });
 
       res.json(result); // response after adding order info to the database
+    });
+
+    //(UPDATE) --> UPDATE THE ORDER STATUS
+    app.put('/order/:id', async (req, res) => {
+      const id = req.params.id;
+
+      const filter = { _id: ObjectId(id) };
+
+      const options = { upsert: true }; // if no order matched then insert the prevOrder database
+
+      // create a document that sets the plot of the movie
+      const updateOrder = {
+        $set: {
+          status: 'approved',
+        },
+      };
+
+      const result = await orderCollection.updateOne(
+        filter,
+        updateOrder,
+        options
+      );
+
+      res.json(result); // send the response to client
+    });
+
+    // (DELETE) --> DELETE AN ORDER FROM THE DATABASE
+    app.delete('/order/:id', async (req, res) => {
+      const id = req.params.id;
+
+      const query = { _id: ObjectId(id) };
+
+      const result = await orderCollection.deleteOne(query); // delete the matched order from database
+
+      res.json(result); // send the response to user
     });
   } finally {
     //await client.close();

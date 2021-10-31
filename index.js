@@ -78,7 +78,16 @@ async function run() {
       res.json(ordersOfUser); // send the order of a user to client side.
     });
 
-    // (CREATE) --> CREATE ALL THE ORDER INFO IN DATABASE
+    //  (CREATE) --> CREATE A FOOD ITEM IN DATABASE
+    app.post('/food', async (req, res) => {
+      const newFood = req.body; // food item info
+
+      const result = await foodsCollection.insertOne(newFood);
+
+      res.json(result); // response after adding food item in the database
+    });
+
+    // (CREATE) --> CREATE AN ORDER INFO IN DATABASE
     app.post('/order', async (req, res) => {
       const newOrder = req.body; // order info
 
@@ -98,7 +107,7 @@ async function run() {
         status: 'pending',
       });
 
-      res.json(result); // response after adding order info to the database
+      res.json(result); // response after adding order info in the database
     });
 
     //(UPDATE) --> UPDATE THE ORDER STATUS

@@ -1,13 +1,13 @@
 <h1 align="center">Foodly Server side</h1>
 
 <div>
-Client side implemented through this backend <a href="https://foodly-e4c7f.web.app">foodly</a>
+see the Client side implemented through this backend: <a href="https://foodly-e4c7f.web.app">live demo</a>
 </div>
 <p>
-Base URL of food item <a href="https://infinite-woodland-69947.herokuapp.com/">foodly</a>
+Base URL of food item <a href="https://infinite-woodland-69947.herokuapp.com/">food item</a>
 </p>
 <p>
-Base URL of order item <a href="https://infinite-woodland-69947.herokuapp.com/order">foodly</a>
+Base URL of order <a href="https://infinite-woodland-69947.herokuapp.com/order">order</a>
 </p>
 
 <!-- TABLE OF CONTENTS -->
@@ -30,7 +30,7 @@ Base URL of order item <a href="https://infinite-woodland-69947.herokuapp.com/or
 
 ## Features
 
-This node project is the backend of <a href="https://foodly-e4c7f.web.app">Foodly</a>. I have implemented crud operation through this node project. Please Look below to see the use of API endpoints of this project. I have used axios in the below example.
+This node project is the backend of <a href="https://foodly-e4c7f.web.app">Foodly</a>. I have implemented CRUD operation through this node project. Please Look at below to see the use of API endpoints. The above example are given using axios.
 
 ## API
 
